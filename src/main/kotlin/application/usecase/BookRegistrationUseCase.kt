@@ -1,14 +1,15 @@
 package application.usecase
 
 import application.dto.BookDto
+import domain.repository.BookRepository
 import infrastructure.repository.elasticsearch.ElasticsearchBookRepository
 
 class BookRegistrationUseCase(
-    private val elasticsearchBookRepository: ElasticsearchBookRepository
+    private val bookRepository: BookRepository
 ) {
     fun registerBook(bookDto: BookDto) {
         try {
-            elasticsearchBookRepository.save(bookDto.toBook())
+            bookRepository.save(bookDto.toBook())
         } catch (e: Exception) {
             throw IllegalStateException(e)
         }
